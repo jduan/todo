@@ -4,7 +4,7 @@ defmodule TodoList do
   def new, do: %TodoList{}
 
   def add_entry(
-    %TodoList{entries: entries, auto_id: auto_id} = todo_list,
+    %TodoList{entries: entries, auto_id: auto_id},
     entry
   ) do
     entry = Map.put(entry, :id, auto_id)
@@ -21,14 +21,17 @@ defmodule TodoList do
   end
 
   def update_entry(
-    %TodoList{entries: entries, auto_id: auto_id} = todo_list,
+    %TodoList{entries: entries} = todo_list,
     entry_id,
     updater_fun
   ) do
     case entries[entry_id] do
       nil -> todo_list
       old_entry ->
-        new_entry = updater_fun.(old_entry)
+        new_entry = %{} = updater_fun.(old_entry)
+        old_entry_id = old_entry.id
+        # assert the id hasn't changed
+        %{id: ^old_entry_id} = new_entry
         new_entries = HashDict.put(entries, new_entry.id, new_entry)
         %TodoList{todo_list | entries: new_entries}
     end
