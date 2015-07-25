@@ -11,5 +11,17 @@ defmodule TodoListTest do
       %{date: {2013, 12, 19}, id: 3, title: "Shopping"},
       %{date: {2013, 12, 19}, id: 1, title: "Dentist"},
     ]
+
+    new_todo = TodoList.update_entry(todo, 3,
+      fn %{title: title} = entry ->
+        %{entry | title: String.upcase(title)}
+      end
+    )
+
+    assert TodoList.entries(new_todo, {2013, 12, 19}) == [
+      %{date: {2013, 12, 19}, id: 3, title: "SHOPPING"},
+      %{date: {2013, 12, 19}, id: 1, title: "Dentist"},
+    ]
+
   end
 end
