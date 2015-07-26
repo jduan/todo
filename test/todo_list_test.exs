@@ -29,4 +29,19 @@ defmodule TodoListTest do
     ]
 
   end
+
+  test "TodoList.new" do
+    entries = [
+      %{date: {2013, 12, 19}, title: "Dentist"},
+      %{date: {2013, 12, 20}, title: "Shopping"},
+      %{date: {2013, 12, 19}, title: "Movies"}
+    ]
+    todo = TodoList.new(entries)
+
+    assert TodoList.entries(todo, {2013, 12, 19}) == [
+      %{date: {2013, 12, 19}, id: 3, title: "Movies"},
+      %{date: {2013, 12, 19}, id: 1, title: "Dentist"},
+    ]
+
+  end
 end

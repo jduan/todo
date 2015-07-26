@@ -3,6 +3,13 @@ defmodule TodoList do
 
   def new, do: %TodoList{}
 
+  def new(entries) do
+    entries
+    |> Enum.reduce(%TodoList{}, fn entry, todo_list ->
+      add_entry(todo_list, entry)
+    end)
+  end
+
   def add_entry(
     %TodoList{entries: entries, auto_id: auto_id},
     entry
