@@ -52,3 +52,9 @@ defmodule TodoList do
     %TodoList{todo_list | entries: new_entries}
   end
 end
+
+defimpl String.Chars, for: TodoList do
+  def to_string(_todo) do
+    "This is a todo list"
+  end
+end

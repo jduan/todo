@@ -8,6 +8,7 @@ defmodule TodoList.CsvImporterTest do
       "2013/12/19,Movies",
     ]
     todo_list = TodoList.CsvImporter.new(lines)
+    IO.puts todo_list
 
     assert TodoList.entries(todo_list, {2013, 12, 19}) == [
       %{date: {2013, 12, 19}, id: 3, title: "Movies"},
