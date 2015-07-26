@@ -23,5 +23,10 @@ defmodule TodoListTest do
       %{date: {2013, 12, 19}, id: 1, title: "Dentist"},
     ]
 
+    new_todo = TodoList.delete_entry_by_id(new_todo, 1)
+    assert TodoList.entries(new_todo, {2013, 12, 19}) == [
+      %{date: {2013, 12, 19}, id: 3, title: "SHOPPING"},
+    ]
+
   end
 end
